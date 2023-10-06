@@ -13,7 +13,7 @@ public class moves{
       turn=p1;
     }
     else{
-    turn=p2;
+      turn=p2;
     }
     System.out.println("it is player %s's move",turn);
   }
