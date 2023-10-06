@@ -1,17 +1,19 @@
 package Algo;
 import java.util.ArrayList;
 
-class moves_initial{
-    String p1="X",p2="O";
-    int moves=0;
-}
+
 
 public class moves{
+
+    public void moves_initial(){
+    String p1="X",p2="O";
+    int moves=0;
+    }
   
-  
-  class move_decide(int moves){
-    this.moves=moves;
+  public move_decide(int moves){
     public String turn;
+    this.moves=moves;
+
     if (this.moves%2==0){
       turn=p1;
     }
