@@ -9,7 +9,8 @@ class moves_initial{
 public class moves{
   
   
-  class move_decide(this.moves){
+  class move_decide(int moves){
+    this.moves=moves;
     public String turn;
     if (this.moves%2==0){
       turn=p1;
