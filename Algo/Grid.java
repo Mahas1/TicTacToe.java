@@ -24,6 +24,7 @@ public class Grid {
             this.grid.add(temp);
         }
 
+
     }
 
     public void printBoard() {
@@ -33,5 +34,18 @@ public class Grid {
         }
         System.out.println(String.join(pipe, grid.get(this.size-1)));
     }
-
+    
+    
+    public boolean checkEmpty() {
+    	for (ArrayList<String> list : this.grid) {
+            for (String element : list) {
+                if (element.trim().isEmpty()) {
+                    // If element is a space or empty string, return true
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
+
