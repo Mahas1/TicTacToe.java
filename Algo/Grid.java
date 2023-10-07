@@ -11,10 +11,10 @@ public class Grid {
     private static final String pipe = "｜";
     private static final String hyphen = "ー";
     private final String horiz;
-    private int turn=0;
-    private int player=0;
-    private String marker;
-    private ArrayList<ArrayList<Integer>> list;
+	private int turn=0;
+	private int player=0;
+	private String marker;
+	private ArrayList<ArrayList<Integer>> list;
 
     public Grid(int size) {
         this.size = size;
@@ -68,8 +68,8 @@ public class Grid {
     	int flag=0,i,j;
     			
     	//row wise victory check
-    	for(i=0;i<this.size;i++) {
-    		for (j=0;j<this.size-1;j++) {
+    	for(i=0;i<this.size-1;i++) {
+    		for (j=0;j<this.size-2;j++) {
     			if ((this.grid.get(i).get(j)!=" ") && (this.grid.get(i).get(j)==this.grid.get(i).get(j+1))){
     				flag=1;
     			}
@@ -104,7 +104,7 @@ public class Grid {
     	}
     	
     	//left diagonal / victory check
-    	j=this.size;
+    	j=this.size-1;
     	for (i=0;i<this.size-1;i++) {	
     			if ((this.grid.get(i).get(j)!=" ") && (this.grid.get(i).get(j)==this.grid.get(i+1).get(j-1))) {
     				flag=1;
