@@ -39,8 +39,8 @@ public class Grid {
     public boolean checkEmpty() {
     	for (ArrayList<String> list : this.grid) {
             for (String element : list) {
-                if (element.trim().isEmpty()) {
-                    // If element is a space or empty string, return true
+                if (element==space) {
+                    // If element is a space, return true
                     return true;
                 }
             }
