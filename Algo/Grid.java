@@ -1,6 +1,8 @@
 package Algo;
 
 import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
 
 public class Grid {
     private final int size;
@@ -9,6 +11,10 @@ public class Grid {
     private static final String pipe = "｜";
     private static final String hyphen = "ー";
     private final String horiz;
+    private int turn=0;
+    private int player=0;
+    private String marker;
+    private ArrayList<ArrayList<Integer>> list;
 
     public Grid(int size) {
         this.size = size;
@@ -53,7 +59,8 @@ public class Grid {
     			}
     		}
     	}
-    	return lst;
+    	this.list=lst;
+    	return this.list;
     }
     
     public boolean checkForWin() {
@@ -117,6 +124,34 @@ public class Grid {
     	return win;
     	
     	
+    }
+    
+    //seeing whos turn it is to play
+    public int whosTurn() {
+    	
+    	if(this.turn%2==0) {
+    		System.out.println("it is player 1's turn");
+    		this.player=1;
+    		this.marker="X";
+    	}
+    	else {
+    		System.out.println("it is player 2's turn");
+    		this.player=2;
+    		this.marker="O";
+    	}
+    	
+    	return this.player;
+    	
+    }
+    
+    public void makeAMove() {
+    	System.out.println("enter index where u want to place marker");
+    	Scanner sc = new Scanner(System.in);
+    	int x=sc.nextInt();
+        int y=sc.nextInt();
+        
+        //if (this.grid.get(x).get(y) in this.list)
+    	 
     }
 
 	
