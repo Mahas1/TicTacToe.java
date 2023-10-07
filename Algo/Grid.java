@@ -55,9 +55,7 @@ public class Grid {
     	}
     	return lst;
     }
-
-
-    //errors still exist in this fxn, will update soon
+    
     public boolean checkForWin() {
     	boolean win=false;
     	int flag=0,i,j;
@@ -65,7 +63,7 @@ public class Grid {
     	//row wise victory check
     	for(i=0;i<this.size;i++) {
     		for (j=0;j<this.size-1;j++) {
-    			if ((this.grid[i][j]!=" ") and (this.grid[i][j]==this.grid[i][j+1]){
+    			if ((this.grid.get(i).get(j)!=" ") && (this.grid.get(i).get(j)==this.grid.get(i).get(j+1))){
     				flag=1;
     			}
     			else {
@@ -77,7 +75,7 @@ public class Grid {
     	//column wise victory check
     	for(j=0;j<this.size;j++) {
     		for (i=0;i<this.size-1;i++) {
-    			if ((this.grid[i][j]!=" ") and (this.grid[i][j]==this.grid[i+1][j]){
+    			if ((this.grid.get(i).get(j)!=" ") && (this.grid.get(i).get(j)==this.grid.get(i+1).get(j))){
     				flag=1;
     			}
     			else {
@@ -85,6 +83,31 @@ public class Grid {
     				break;
     			}
     		} 		
+    	}
+    	
+    	//right digonal \ victory check
+    	for(i=0;i<this.size-1;i++) {
+    		if((this.grid.get(i).get(i)!=" ") && (this.grid.get(i).get(i+1)==this.grid.get(i+1).get(i+1))) {
+    			flag=1;
+    		}
+    		else {
+    			flag=0;
+    			break;
+    		}
+    	}
+    	
+    	//left diagonal / victory check
+    	j=this.size;
+    	for (i=0;i<this.size-1;i++) {	
+    			if ((this.grid.get(i).get(j)!=" ") && (this.grid.get(i).get(j)==this.grid.get(i+1).get(j-1))) {
+    				flag=1;
+    				j-=1;
+    			}
+    			else {
+    				flag=0;
+    				break;
+    			}
+    		
     	}
     	
     	if (flag==1) {
@@ -95,5 +118,7 @@ public class Grid {
     	
     	
     }
+
+	
 }
 
