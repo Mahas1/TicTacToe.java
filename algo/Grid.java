@@ -61,7 +61,7 @@ public class Grid {
     }
     
     //counts number of occurances of players piece, opponents piece and spaces for given row id
-    public ArrayList<Integer> CountRowOccurrenceOf(String piece, int rowID) {
+    public ArrayList<Integer> countRowOccurrenceOf(String piece, int rowID) {
     	int i,countPiece=0,countSpace=0;
     	for(i=0;i<this.size;i++) {
     		if ((this.grid.get(rowID).get(i)).equals(piece)) {
@@ -82,7 +82,7 @@ public class Grid {
     
    
   //counts number of occurances of players piece, opponents piece and spaces for given column id
-    public ArrayList<Integer> CountColumnOccurrenceOf(String piece, int colID) {
+    public ArrayList<Integer> countColumnOccurrenceOf(String piece, int colID) {
     	int i,countPiece=0,countSpace=0;
     	for(i=0;i<this.size;i++) {
     		if ((this.grid.get(i).get(colID)).equals(piece)) {
@@ -100,7 +100,7 @@ public class Grid {
     	return ListOfReturnValues;
     }
     
-    public ArrayList<Integer> CountRightDiagonalOccurrenceOf(String piece) {
+    public ArrayList<Integer> countRightDiagonalOccurrenceOf(String piece) {
     	int countPiece=0,countSpace=0;
     	for(int i=0;i<this.size;i++) {
     		if(this.grid.get(i).get(i).equals(piece)) {
@@ -119,7 +119,7 @@ public class Grid {
     	
     }
     
-    public ArrayList<Integer> CountLeftDiagonalOccurrenceOf(String piece) {
+    public ArrayList<Integer> countLeftDiagonalOccurrenceOf(String piece) {
     	int countPiece=0,countSpace=0;
     	for(int i=0;i<this.size;i++) {
     		for(int j=this.size-1;0<=j;j--) {
@@ -139,6 +139,10 @@ public class Grid {
     	return ListOfReturnValues;
     	
     }
+    
+    
+    	
+   
 
 	//seeing whos turn it is to play
     public int whosTurn() {
