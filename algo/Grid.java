@@ -1,4 +1,4 @@
-package algo;
+package Algo;
 
 import java.util.ArrayList;
 import java.util.*;
@@ -13,7 +13,6 @@ public class Grid {
 	private int turn=0;
 	private int player=0;
 	private String marker;
-	private ArrayList<ArrayList<Integer>> list;
 
     public Grid(int size) {
         this.size = size;
@@ -58,74 +57,49 @@ public class Grid {
     			}
     		}
     	}
-    	this.list=lst;
     	return lst;
     }
     
-    public boolean checkForWin() {
-    	boolean win=false;
-    	int flag=0,i,j;
-    			
-    	//row wise victory check
-    	for(i=0;i<this.size-1;i++) {
-    		for (j=0;j<this.size-2;j++) {
-    			if ((this.grid.get(i).get(j)!=" ") && (this.grid.get(i).get(j)==this.grid.get(i).get(j+1))){
-    				flag=1;
-    			}
-    			else {
-    				flag=0;
-    				break;
-    			}
-    		} 		
-    	}
-    	//column wise victory check
-    	for(j=0;j<this.size;j++) {
-    		for (i=0;i<this.size-1;i++) {
-    			if ((this.grid.get(i).get(j)!=" ") && (this.grid.get(i).get(j)==this.grid.get(i+1).get(j))){
-    				flag=1;
-    			}
-    			else {
-    				flag=0;
-    				break;
-    			}
-    		} 		
-    	}
-    	
-    	//right digonal \ victory check
-    	for(i=0;i<this.size-1;i++) {
-    		if((this.grid.get(i).get(i)!=" ") && (this.grid.get(i).get(i+1)==this.grid.get(i+1).get(i+1))) {
-    			flag=1;
+    //counts number of occurances of players piece, opponents piece and spaces for given row id
+    public ArrayList<Integer> CountRowOccurrenceOf(String piece, int rowID) {
+    	int i,j,countPiece=0,countSpace=0;
+    	for(i=0;i<this.size;i++) {
+    		if ((this.grid.get(rowID).get(i)).equals(piece)) {
+    			countPiece+=1;
     		}
-    		else {
-    			flag=0;
-    			break;
+    		if ((this.grid.get(rowID).get(i)).equals(space)) {
+    			countSpace+=1;
     		}
     	}
+    	ArrayList<Integer> ListOfReturnValues=new ArrayList<Integer>();
+    	ListOfReturnValues.add(countPiece);
+    	ListOfReturnValues.add(this.size-countPiece-countSpace);
+    	ListOfReturnValues.add(countSpace);
     	
-    	//left diagonal / victory check
-    	j=this.size-1;
-    	for (i=0;i<this.size-1;i++) {	
-    			if ((this.grid.get(i).get(j)!=" ") && (this.grid.get(i).get(j)==this.grid.get(i+1).get(j-1))) {
-    				flag=1;
-    				j-=1;
-    			}
-    			else {
-    				flag=0;
-    				break;
-    			}
-    		
-    	}
-    	
-    	if (flag==1) {
-    		win=true;
-    	}
-    	
-    	return win;
-    	
-    	
+    	return ListOfReturnValues;
     }
     
-    //seeing whos turn it is to play
+    public ArrayList<Integer> CountColumnOccurrenceOf(String piece, int colID) {
+    	int i,j,countPiece=0,countSpace=0;
+    	for(i=0;i<this.size;i++) {
+    		if ((this.grid.get(i).get(colID)).equals(piece)) {
+    			countPiece+=1;
+    		}
+    		if ((this.grid.get(i).get(colID)).equals(space)) {
+    			countSpace+=1;
+    		}
+    	}
+    	ArrayList<Integer> ListOfReturnValues=new ArrayList<Integer>();
+    	ListOfReturnValues.add(countPiece);
+    	ListOfReturnValues.add(this.size-countPiece-countSpace);
+    	ListOfReturnValues.add(countSpace);
+    	
+    	return ListOfReturnValues;
+    }
+    
+   
+
+	//seeing whos turn it is to play
     public int whosTurn() {
     	
     	if(this.turn%2==0) {
@@ -155,4 +129,3 @@ public class Grid {
 
 	
 }
-
