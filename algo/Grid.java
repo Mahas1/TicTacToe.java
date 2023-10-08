@@ -1,7 +1,6 @@
-package Algo;
+package algo;
 
 import java.util.ArrayList;
-import java.io.*;
 import java.util.*;
 
 public class Grid {
@@ -60,7 +59,7 @@ public class Grid {
     		}
     	}
     	this.list=lst;
-    	return this.list;
+    	return lst;
     }
     
     public boolean checkForWin() {
