@@ -1,4 +1,4 @@
-package Algo;
+package algo;
 
 import java.util.ArrayList;
 import java.util.*;
@@ -122,15 +122,15 @@ public class Grid {
     public ArrayList<Integer> countLeftDiagonalOccurrenceOf(String piece) {
     	int countPiece=0,countSpace=0;
     	for(int i=0;i<this.size;i++) {
-    		for(int j=this.size-1;0<=j;j--) {
-    			if(this.grid.get(i).get(j).equals(piece)) {
-        			countPiece+=1;
-        		}
-        		if(this.grid.get(i).get(j).equals(space)) {
-        			countPiece+=1;
-        		}
-    		}
+    		if(this.grid.get(i).get(this.size-i-1).equals(piece)) {
+        		countPiece+=1;
+        	}
+        	if(this.grid.get(i).get(this.size-i-1).equals(space)) {
+        		countPiece+=1;
+        	}
+    		
     	}
+    }
     	ArrayList<Integer> ListOfReturnValues=new ArrayList<Integer>();
     	ListOfReturnValues.add(countPiece);
     	ListOfReturnValues.add(this.size-countPiece-countSpace);
