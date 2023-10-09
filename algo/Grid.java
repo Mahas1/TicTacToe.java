@@ -140,7 +140,29 @@ public class Grid {
     	
     }
     
+    public boolean check4Win(){
+    	int i;
+    	boolean win=false;
     
+    	for(i=0;i<this.size;i++) {
+    		ArrayList<Integer> rows=countRowOccurrenceOf(this.marker, i);
+    		ArrayList<Integer> columns=countColumnOccurrenceOf(this.marker, i);
+    		for(int j=0;j<2;j++) {
+    			if((rows.get(0)==this.size) || (columns.get(j)==this.size)){
+    				win=true;
+    			}
+    		}
+    	}
+    	ArrayList<Integer> rDiag=countRightDiagonalOccurrenceOf(this.marker);
+    	ArrayList<Integer> lDiag=countLeftDiagonalOccurrenceOf(this.marker);
+    	for(int j=0;j<2;j++) {
+			if((rDiag.get(0)==this.size) || (lDiag.get(j)==this.size)){
+				win=true;
+			}
+		}
+    	return win;
+    	
+    }
     	
    
 
