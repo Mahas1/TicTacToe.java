@@ -130,7 +130,7 @@ public class Grid {
         	}
     		
     	}
-    }
+    
     	ArrayList<Integer> ListOfReturnValues=new ArrayList<Integer>();
     	ListOfReturnValues.add(countPiece);
     	ListOfReturnValues.add(this.size-countPiece-countSpace);
