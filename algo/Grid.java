@@ -168,7 +168,9 @@ public class Grid {
     	int x=sc.nextInt();
         int y=sc.nextInt();
         
-        //if (this.grid.get(x).get(y) in this.list)
+        //checkempty function call
+        this.grid.get(x).set(y,this.marker);
+        //checkforwin function call
     	 
     }
 
