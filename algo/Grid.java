@@ -66,7 +66,7 @@ public class Grid {
     	return lst;
     }
     
-    //counts number of occurances of players piece, opponents piece and spaces for given row id
+    //counts number of occurrences of players piece, opponents piece and spaces for given row id
     public int countRowOccurrenceOf(String piece, int rowID) {
     	int count=0;
 
