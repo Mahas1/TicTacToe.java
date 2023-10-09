@@ -17,7 +17,9 @@ public class Grid {
     public Grid(int size) {
         this.size = size;
         this.grid = new ArrayList<>();
-         this.horiz = new String(new char[size*2-1]).replace("\0", hyphen);
+
+		// create the horizontal line 2*size-1 characters long
+		this.horiz = new String(new char[size*2-1]).replace("\0", hyphen);
 
         // populate the board with emptiness
         for (int i=0; i<size; i++) {
@@ -49,7 +51,11 @@ public class Grid {
     	
     	for(i=0;i<this.size;i++) {
     		for(j=0;j<this.size;j++) {
-    			if (this.grid.get(i).get(j)==space){
+    			if (this.grid
+						.get(i)
+						.get(j)
+						.equals(space)
+				){
     				ArrayList<Integer> sublst = new ArrayList<Integer>();
     				sublst.add(i);
     				sublst.add(j);
@@ -61,106 +67,75 @@ public class Grid {
     }
     
     //counts number of occurances of players piece, opponents piece and spaces for given row id
-    public ArrayList<Integer> countRowOccurrenceOf(String piece, int rowID) {
-    	int i,countPiece=0,countSpace=0;
-    	for(i=0;i<this.size;i++) {
-    		if ((this.grid.get(rowID).get(i)).equals(piece)) {
-    			countPiece+=1;
-    		}
-    		if ((this.grid.get(rowID).get(i)).equals(space)) {
-    			countSpace+=1;
-    		}
-    	}
-    	ArrayList<Integer> ListOfReturnValues=new ArrayList<Integer>();
-    	ListOfReturnValues.add(countPiece);
-    	ListOfReturnValues.add(this.size-countPiece-countSpace);
-    	ListOfReturnValues.add(countSpace);
-    	
-    	return ListOfReturnValues;
+    public int countRowOccurrenceOf(String piece, int rowID) {
+    	int count=0;
+
+    	for(int i=0;i<this.size;i++) {
+			if ((this.grid.get(rowID).get(i)).equals(piece)) {
+				count += 1;
+			}
+		}
+    	return count;
     }
     
     
    
-  //counts number of occurances of players piece, opponents piece and spaces for given column id
-    public ArrayList<Integer> countColumnOccurrenceOf(String piece, int colID) {
-    	int i,countPiece=0,countSpace=0;
-    	for(i=0;i<this.size;i++) {
+  //counts number of occurrences of a piece
+    public int countColumnOccurrenceOf(String piece, int colID) {
+		int count=0;
+    	for(int i=0;i<this.size;i++) {
     		if ((this.grid.get(i).get(colID)).equals(piece)) {
-    			countPiece+=1;
+    			count+=1;
     		}
-    		if ((this.grid.get(i).get(colID)).equals(space)) {
-    			countSpace+=1;
-    		}
+
     	}
-    	ArrayList<Integer> ListOfReturnValues=new ArrayList<Integer>();
-    	ListOfReturnValues.add(countPiece);
-    	ListOfReturnValues.add(this.size-countPiece-countSpace);
-    	ListOfReturnValues.add(countSpace);
-    	
-    	return ListOfReturnValues;
+
+    	return count;
     }
     
-    public ArrayList<Integer> countRightDiagonalOccurrenceOf(String piece) {
-    	int countPiece=0,countSpace=0;
+    public int countRightDiagonalOccurrenceOf(String piece) {
+    	int count=0;
     	for(int i=0;i<this.size;i++) {
     		if(this.grid.get(i).get(i).equals(piece)) {
-    			countPiece+=1;
-    		}
-    		if(this.grid.get(i).get(i).equals(space)) {
-    			countPiece+=1;
+    			count+=1;
     		}
     	}
-    	ArrayList<Integer> ListOfReturnValues=new ArrayList<Integer>();
-    	ListOfReturnValues.add(countPiece);
-    	ListOfReturnValues.add(this.size-countPiece-countSpace);
-    	ListOfReturnValues.add(countSpace);
-    	
-    	return ListOfReturnValues;
+
+    	return count;
     	
     }
     
-    public ArrayList<Integer> countLeftDiagonalOccurrenceOf(String piece) {
-    	int countPiece=0,countSpace=0;
-    	for(int i=0;i<this.size;i++) {
+    public int countLeftDiagonalOccurrenceOf(String piece) {
+    	int countPiece = 0;
+
+		for (int i=0;i<this.size;i++) {
     		if(this.grid.get(i).get(this.size-i-1).equals(piece)) {
         		countPiece+=1;
         	}
-        	if(this.grid.get(i).get(this.size-i-1).equals(space)) {
-        		countPiece+=1;
-        	}
-    		
     	}
-    
-    	ArrayList<Integer> ListOfReturnValues=new ArrayList<Integer>();
-    	ListOfReturnValues.add(countPiece);
-    	ListOfReturnValues.add(this.size-countPiece-countSpace);
-    	ListOfReturnValues.add(countSpace);
-    	
-    	return ListOfReturnValues;
-    	
+    	return countPiece;
     }
     
     public boolean check4Win(){
     	int i;
-    	boolean win=false;
     
     	for(i=0;i<this.size;i++) {
-    		ArrayList<Integer> rows=countRowOccurrenceOf(this.marker, i);
-    		ArrayList<Integer> columns=countColumnOccurrenceOf(this.marker, i);
-    		for(int j=0;j<2;j++) {
-    			if((rows.get(0)==this.size) || (columns.get(j)==this.size)){
-    				win=true;
+    		int rows=countRowOccurrenceOf(this.marker, i);
+    		int columns=countColumnOccurrenceOf(this.marker, i);
+
+			if (rows==this.size || columns==this.size) {
+    				return true;
     			}
     		}
-    	}
-    	ArrayList<Integer> rDiag=countRightDiagonalOccurrenceOf(this.marker);
-    	ArrayList<Integer> lDiag=countLeftDiagonalOccurrenceOf(this.marker);
+
+    	int rDiag=countRightDiagonalOccurrenceOf(this.marker);
+    	int lDiag=countLeftDiagonalOccurrenceOf(this.marker);
     	for(int j=0;j<2;j++) {
-			if((rDiag.get(0)==this.size) || (lDiag.get(j)==this.size)){
-				win=true;
+			if((rDiag == this.size) || (lDiag == this.size)){
+				return true;
 			}
 		}
-    	return win;
+    	return false;
     	
     }
     	
