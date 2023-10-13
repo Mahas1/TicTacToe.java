@@ -3,9 +3,12 @@ import algo.Grid;
 public class Main {
     public static void main(String[] args) {
         Grid board = new Grid(3);
+        while (!board.check4Win()) {
+            board.printBoard();
+            board.makeAMove();
+            // switch places
+        }
         board.printBoard();
-        //i've added checkEmpty as a direct call here, later needs to be put inside the function for making a move?
-        System.out.println(board.checkEmpty());
-        System.out.println(board.checkForWin());
+        System.out.println("Game over!");
     }
 }

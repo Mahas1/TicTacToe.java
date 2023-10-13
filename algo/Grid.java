@@ -9,10 +9,13 @@ public class Grid {
     private static final String space = "　";
     private static final String pipe = "｜";
     private static final String hyphen = "ー";
+	private static final String marker_x = "ｘ";
+	private static final String marker_o = "ｏ";
+
     private final String horiz;
 	private int turn=0;
 	private int player=0;
-	private String marker;
+	private String marker = marker_x;
 
     public Grid(int size) {
         this.size = size;
@@ -40,9 +43,6 @@ public class Grid {
         }
         System.out.println(String.join(pipe, grid.get(this.size-1)));
     }
-    
-    
-    		
 
     
     public ArrayList<ArrayList<Integer>> checkEmpty() {
@@ -118,17 +118,19 @@ public class Grid {
     
     public boolean check4Win(){
     	int i;
-    
+		String to_check = Objects.equals(this.marker, marker_x) ? marker_o : marker_x;
+
     	for(i=0;i<this.size;i++) {
-    		int rows=countRowOccurrenceOf(this.marker, i);
-    		int columns=countColumnOccurrenceOf(this.marker, i);
+
+    		int rows=countRowOccurrenceOf(to_check, i);
+    		int columns=countColumnOccurrenceOf(to_check, i);
 
 			if (rows==this.size || columns==this.size) {
     				return true;
     			}
     		}
 
-    	int rDiag=countRightDiagonalOccurrenceOf(this.marker);
+    	int rDiag=countRightDiagonalOccurrenceOf(to_check);
     	int lDiag=countLeftDiagonalOccurrenceOf(this.marker);
     	for(int j=0;j<2;j++) {
 			if((rDiag == this.size) || (lDiag == this.size)){
@@ -138,12 +140,10 @@ public class Grid {
     	return false;
     	
     }
-    	
-   
 
 	//seeing whos turn it is to play
     public int whosTurn() {
-    	
+
     	if(this.turn%2==0) {
     		System.out.println("it is player 1's turn");
     		this.player=1;
@@ -158,17 +158,32 @@ public class Grid {
     	return this.player;
     	
     }
-    
+
+	public boolean canPlace(int x, int y) {
+		if (x >= this.size || y >= this.size) {
+			return false;
+		}
+        return this.grid.get(x).get(y).equals(space);
+	}
+
     public void makeAMove() {
-    	System.out.println("enter index where u want to place marker");
+    	System.out.printf("enter index where u want to place marker (%s)\n", this.marker);
     	Scanner sc = new Scanner(System.in);
     	int x=sc.nextInt();
         int y=sc.nextInt();
         
         //checkempty function call
-        this.grid.get(x).set(y,this.marker);
-        //checkforwin function call
-    	 
+		if (canPlace(x,y)) {
+			this.grid.get(x).set(y, this.marker);
+            if (this.marker.equals(marker_x)) {
+                this.marker = marker_o;
+            } else {
+				this.marker = marker_x;
+			}
+        }
+		else {
+			System.out.println("invalid move");
+		}
     }
 
 	
