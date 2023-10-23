@@ -1,11 +1,11 @@
 package algo;
  
 import java.util.ArrayList;
-import java.util.*;
+import java.util.
 
 public class Grid {
     private final int size;
-    private ArrayList<ArrayList<String>> grid;
+    private final ArrayList<ArrayList<String>> grid;
     private static final String space = "　";
     private static final String pipe = "｜";
     private static final String hyphen = "ー";
@@ -13,7 +13,7 @@ public class Grid {
 	private static final String marker_o = "ｏ";
 
     private final String horiz;
-	private int turn=0;
+	private final int turn=0;
 	private int player=0;
 	private String marker = marker_x;
 
