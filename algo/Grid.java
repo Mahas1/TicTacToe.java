@@ -1,7 +1,7 @@
 package algo;
  
 import java.util.ArrayList;
-import java.util.
+import java.util.*;
 
 public class Grid {
     private final int size;
@@ -35,6 +35,34 @@ public class Grid {
 
 
     }
+
+	public int getSize() {
+		return this.size;
+	}
+
+	public String getGridValue(int x, int y) {
+		return this.grid.get(x).get(y);
+	}
+
+	public boolean isBoardFull() {
+		for(int i=0;i<this.size;i++) {
+			for(int j=0;j<this.size;j++) {
+				if(this.grid.get(i).get(j).equals(space)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public int getOpponentPlayer() {
+		if(this.player==1) {
+			return 2;
+		}
+		else {
+			return 1;
+		}
+	}
 
     public void printBoard() {
         for (int i=0; i<size-1; i++) {
@@ -147,17 +175,26 @@ public class Grid {
     	if(this.turn%2==0) {
     		System.out.println("it is player 1's turn");
     		this.player=1;
-    		this.marker="X";
+    		this.marker=marker_x;
     	}
     	else {
     		System.out.println("it is player 2's turn");
     		this.player=2;
-    		this.marker="O";
+    		this.marker=marker_o;
     	}
     	
     	return this.player;
     	
     }
+
+	public void makeMove(int x, int y) {
+		this.grid.get(x).set(y, this.marker);
+		if (this.marker.equals(marker_x)) {
+			this.marker = marker_o;
+		} else {
+			this.marker = marker_x;
+		}
+	}
 
 	public boolean canPlace(int x, int y) {
 		if (x >= this.size || y >= this.size) {
@@ -174,14 +211,8 @@ public class Grid {
         
         //checkempty function call
 		if (canPlace(x,y)) {
-			this.grid.get(x).set(y, this.marker);
-            if (this.marker.equals(marker_x)) {
-                this.marker = marker_o;
-            } else {
-				this.marker = marker_x;
-			}
-        }
-		else {
+			makeMove(x, y);
+		} else {
 			System.out.println("invalid move");
 		}
     }

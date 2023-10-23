@@ -1,7 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import Grid.java;
+import java.awt.event.ActionListener;
+
+import algo.Grid;
 
 public class GamePanel extends JPanel {
     private final Grid board;

@@ -18,7 +18,8 @@ public class Main {
                 // Handle game logic here if needed
                 int player = board.whosTurn();
                 System.out.println("Player " + player + "'s turn");
-                // You can add additional logic here for AI moves or other player interactions
+                board.printBoard();
+                board.makeAMove();
             }
 
             // Handle game over logic here (display a message, etc.)
