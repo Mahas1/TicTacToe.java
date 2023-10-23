@@ -1,14 +1,33 @@
 import algo.Grid;
+import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        Grid board = new Grid(3);
-        while (!board.check4Win()) {
-            board.printBoard();
-            board.makeAMove();
-            // switch places
-        }
-        board.printBoard();
-        System.out.println("Game over!");
+        SwingUtilities.invokeLater(() -> {
+            Grid board = new Grid(3);
+
+            JFrame frame = new JFrame("Tic Tac Toe");
+            GamePanel gamePanel = new GamePanel(board);
+
+            frame.add(gamePanel);
+            frame.pack();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setVisible(true);
+
+            while (!board.check4Win() && !board.isBoardFull()) {
+                // Handle game logic here if needed
+                int player = board.whosTurn();
+                System.out.println("Player " + player + "'s turn");
+                // You can add additional logic here for AI moves or other player interactions
+            }
+
+            // Handle game over logic here (display a message, etc.)
+            if (board.check4Win()) {
+                System.out.println("Player " + board.getOpponentPlayer() + " wins!");
+            } else {
+                System.out.println("It's a draw!");
+            }
+        });
     }
 }
+
