@@ -200,7 +200,5 @@ public class Grid {
    
 	public String getPlayer() {
 		return this.player;
-	}
-    
-
+	}    
 }
