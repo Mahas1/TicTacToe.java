@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Grid {
     private final int size;
-    private ArrayList<ArrayList<String>> grid;
+    private final ArrayList<ArrayList<String>> grid;
     private static final String space = " ";
     private static final String pipe = "|";
     private static final String hyphen = "-";
@@ -12,24 +12,19 @@ public class Grid {
     private static final String marker_o = "O";
 
     private final String horiz;
-    private int turn = 0;
-    private String player;
+	private String player;
     private String marker = marker_x;
 
     public Grid(int size) {
         this.size = size;
-        this.grid = new ArrayList<ArrayList<String>>();
+        this.grid = new ArrayList<>();
 
         // create the horizontal line 2*size-1 characters long
-        StringBuilder horizontalBuilder = new StringBuilder();
-        for (int i = 0; i < size * 2 - 1; i++) {
-            horizontalBuilder.append(hyphen);
-        }
-        this.horiz = horizontalBuilder.toString();
+		this.horiz = hyphen.repeat(Math.max(0, size * 2 - 1));
 
         // populate the board with emptiness
         for (int i = 0; i < size; i++) {
-            ArrayList<String> temp = new ArrayList<String>();
+            ArrayList<String> temp = new ArrayList<>();
             for (int j = 0; j < size; j++) {
                 temp.add(space);
             }
@@ -39,17 +34,17 @@ public class Grid {
 
     public void printBoard() {
         for (int i = 0; i < size - 1; i++) {
-            System.out.println(join(grid.get(i), pipe));
+            System.out.println(join(grid.get(i)));
             System.out.println(this.horiz);
         }
-        System.out.println(join(grid.get(size - 1), pipe));
+        System.out.println(join(grid.get(size - 1)));
     }
 
-    private String join(ArrayList<String> list, String delimiter) {
+    private String join(ArrayList<String> list) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             if (i > 0) {
-                sb.append(delimiter);
+                sb.append(Grid.pipe);
             }
             sb.append(list.get(i));
         }
@@ -58,7 +53,7 @@ public class Grid {
 
     public ArrayList<ArrayList<Integer>> checkEmpty() {
     	int i,j;
-    	ArrayList<ArrayList<Integer>> lst = new ArrayList<ArrayList<Integer>>();
+    	ArrayList<ArrayList<Integer>> lst = new ArrayList<>();
     	
     	for(i=0;i<this.size;i++) {
     		for(j=0;j<this.size;j++) {
@@ -67,7 +62,7 @@ public class Grid {
 						.get(j)
 						.equals(space)
 				){
-    				ArrayList<Integer> sublst = new ArrayList<Integer>();
+    				ArrayList<Integer> sublst = new ArrayList<>();
     				sublst.add(i);
     				sublst.add(j);
     				lst.add(sublst);		
@@ -179,17 +174,18 @@ public class Grid {
     
     public String whosTurn() {
 
-    	if(this.turn%2==0) {
+		int turn = 0;
+		if(turn %2==0) {
     		System.out.println("it is player 1's turn");
-    		
+
     		this.marker="X";
     	}
     	else {
     		System.out.println("it is player 2's turn");
-    		
+
     		this.marker="O";
     	}
-    	
+
     	return this.player;
     	
     }

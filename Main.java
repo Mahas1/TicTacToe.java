@@ -1,4 +1,4 @@
-package Algo;
+import Algo.TicTacToeGUI;
 
 public class Main {
     public static void main(String[] args) {

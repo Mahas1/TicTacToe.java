@@ -2,8 +2,6 @@ package Algo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class TicTacToeGUI {
     private Grid board;
@@ -24,11 +22,7 @@ public class TicTacToeGUI {
                 frame.add(buttons[i][j]);
                 final int row = i;
                 final int col = j;
-                buttons[i][j].addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        onButtonClick(row, col);
-                    }
-                });
+                buttons[i][j].addActionListener(e -> onButtonClick(row, col));
             }
         }
 
